@@ -1,0 +1,14 @@
+@import './../../../styles/colors.scss';
+@import './../../../styles/mixins.scss';
+
+:host {
+    max-width: 606px;
+    width: 100%;
+    max-height: 769px;
+    height: 100%;
+    background-color: $primary-color;
+    padding: 50px 60px;
+    border-radius: 30px;
+    box-shadow: 0px 2px 10px 0px #00000014;
+    @include flex-layout(column, unset, center, 30px);
+}

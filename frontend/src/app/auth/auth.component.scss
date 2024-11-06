@@ -1,0 +1,37 @@
+@import './../../styles/colors.scss';
+@import './../../styles/mixins.scss';
+
+.auth-background {
+    height: 100%;
+    background-color: $background-color;
+}
+
+.auth {
+    max-width: 1920px;
+    width: 100%;
+    max-height: 1080px;
+    height: 100%;
+    padding: 75px 75px 48px 75px;
+    @include flex-layout(column, unset, center, unset);
+
+    header {
+        width: 100%;
+        @include flex-layout(unset, space-between, center, unset);
+    }
+}
+
+.right-container {
+    height: 100%;
+    @include flex-layout(column, space-between, flex-end, unset);
+}
+
+.main-footer {
+    height: 100%;
+    width: 100%;
+    @include flex-layout(column, space-between, center, unset);
+
+    footer {
+        width: 100%;
+        @include flex-layout(unset, center, center, 16px);
+    }
+}
