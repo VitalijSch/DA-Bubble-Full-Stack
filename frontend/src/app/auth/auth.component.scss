@@ -9,15 +9,38 @@
 .auth-container {
     max-width: 1920px;
     width: 100%;
-    max-height: 1080px;
     height: 100%;
     margin: 0 auto;
     padding: 75px 75px 48px 75px;
-    @include flex-layout(column, unset, center, unset);
+    @include flex-layout(column, center, center, unset);
+    position: relative;
 
     header {
         width: 100%;
-        @include flex-layout(unset, space-between, center, unset);
+        @include flex-layout(unset, flex-end, center, unset);
+
+        .animation {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            animation: moveTopLeft 1s ease 3.4s forwards;
+        }
+
+        .no-animation {
+            position: absolute;
+            top: 75px;
+            left: 75px;
+        }
+    }
+}
+
+@keyframes moveTopLeft {
+    to {
+        top: 75px;
+        left: 75px;
+        transform: translate(0, 0);
     }
 }
 
@@ -26,15 +49,10 @@
     @include flex-layout(column, space-between, flex-end, unset);
 }
 
-.main-footer-container {
-    height: 100%;
-    width: 100%;
-    @include flex-layout(column, space-between, center, unset);
 
-    footer {
-        width: 100%;
-        @include flex-layout(unset, center, center, 16px);
-    }
+footer {
+    width: 100%;
+    @include flex-layout(unset, center, center, 16px);
 }
 
 a {
@@ -43,5 +61,53 @@ a {
         font-weight: 500;
         border-color: $border-color;
         color: $text-button-color;
+    }
+}
+
+.intro {
+    height: 100%;
+    background: linear-gradient(1.46deg, #313AE6 1.22%, #797EF3 98.76%);
+    @include flex-layout(unset, center, center, unset);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    animation: fadeOut 1s ease 3.5s forwards;
+
+    .logo-container {
+        @include flex-layout(unset, center, center, 40px);
+        transform: translateX(0);
+        animation: moveLeft 0.5s ease 1s forwards;
+        margin-left: 510px;
+
+        .overflow-hidden {
+            overflow: hidden;
+
+            svg {
+                transform: translateX(-470px);
+                animation: slideIn 1s ease 1.5s forwards;
+            }
+        }
+    }
+}
+
+@keyframes moveLeft {
+    to {
+        transform: translateX(-200px);
+    }
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        z-index: -1;
     }
 }
