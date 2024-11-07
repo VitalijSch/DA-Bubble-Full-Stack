@@ -7,8 +7,93 @@
     max-height: 769px;
     height: 100%;
     background-color: $primary-color;
-    padding: 50px 60px;
+    padding: 50px 53px;
     border-radius: 30px;
     box-shadow: 0px 2px 10px 0px #00000014;
     @include flex-layout(column, unset, center, 30px);
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    @include flex-layout(column, unset, center, 30px);
+}
+
+.forgot-password {
+    padding: 5px 15px;
+
+    &:hover {
+        font-weight: 500;
+        background-color: $background-color;
+        color: $text-button-color;
+    }
+}
+
+.or-container {
+    width: 100%;
+    @include flex-layout(unset, space-between, center, unset);
+
+    .line-container {
+        flex: 1;
+        height: 1px;
+        background-color: $line-color;
+    }
+
+    span {
+        padding: 5px 15px;
+    }
+}
+
+.google-button {
+    max-width: 500px;
+    width: 100%;
+    max-height: 60px;
+    height: 100%;
+    @include flex-layout(unset, center, center, 20px);
+    background-color: $background-color;
+    padding: 11px 32px;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $text-button-color;
+    }
+
+    &:hover a {
+        font-weight: 700;
+        color: $text-button-color;
+    }
+
+    &:active {
+        border-color: $active-button-color;
+    }
+
+    &:active a {
+        font-weight: 500;
+    }
+}
+
+.login-container {
+    @include flex-layout(unset, center, center, 30px);
+
+    button {
+
+        &:last-child {
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: 1px solid $text-button-hover-color;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 24.55px;
+            background-color: $primary-color;
+            color: $text-button-color;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $text-button-color;
+                color: $primary-color;
+            }
+        }
+    }
 }
