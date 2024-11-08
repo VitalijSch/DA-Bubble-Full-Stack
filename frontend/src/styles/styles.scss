@@ -68,13 +68,13 @@ span {
         border: 1px solid transparent;
         @include flex-layout(unset, unset, center, unset);
         padding: 18px 32px 18px 86px;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 21.6px;
         cursor: pointer;
 
         &::placeholder {
-            font-size: 18px;
-            font-weight: 500;
-            line-height: 21.6px;
-            color: $placeholder-color;
+            color: $active-button-color;
         }
 
         &:hover {
@@ -105,7 +105,7 @@ small {
     font-size: 18px;
     font-weight: 700;
     line-height: 24.55px;
-    color: $primary-color;
+    color: $white-color;
     cursor: pointer;
 }
 
@@ -118,7 +118,7 @@ small {
 }
 
 .inactive-button {
-    background-color: $placeholder-color;
+    background-color: $active-button-color;
 }
 
 .d-none {

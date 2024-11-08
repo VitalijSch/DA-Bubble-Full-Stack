@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,9 +13,12 @@ import { RouterModule } from '@angular/router';
 })
 export class SigninComponent {
   public isChecked: boolean = false;
+  public showCheckboxError: boolean = false;
   public signinForm: FormGroup;
 
   private fb: FormBuilder = inject(FormBuilder);
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
 
   constructor() {
     this.signinForm = this.fb.group({
@@ -24,11 +28,28 @@ export class SigninComponent {
     });
   }
 
-  public signinUser(): void {
-
+  public userData(): void {
+    if (!this.isChecked) {
+      this.showCheckboxError = true;
+    } else {
+      this.showCheckboxError = false;
+    }
+    if (this.signinForm.valid && this.isChecked) {
+      let user = this.authService.user;
+      user.name = this.signinForm.get('name')?.value;
+      user.email = this.signinForm.get('email')?.value;
+      user.password = this.signinForm.get('password')?.value
+      this.authService.user = user;
+      this.router.navigate(['/auth/choose-avatar']);
+    }
   }
 
   public toggleIsChecked(): void {
     this.isChecked = !this.isChecked;
+    if(this.isChecked) {
+      this.showCheckboxError = false;
+    } else {
+      this.showCheckboxError = true;
+    }
   }
 }

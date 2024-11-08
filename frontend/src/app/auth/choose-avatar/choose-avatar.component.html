@@ -10,6 +10,25 @@
                 fill="black" />
         </g>
     </svg>
-    <h1>Wähle deinen Avatar</h1>
-
+    <div class="top-container">
+        <h1>Wähle deinen Avatar</h1>
+        <img (click)="onUploadButtonClick()" class="default-avatar" src="{{selectedAvatar}}" alt="avatar">
+    </div>
+    <div class="bottom-container">
+        <span class="name-style">Frederick Beck</span>
+        <span class="text-style">Aus der Liste wählen</span>
+        <div class="avatar-container">
+            @for (avatar of [0,1,2,3,4,5]; track $index) {
+            <img (click)="selectAvatar($index)" class="avatar" src="./../../../assets/images/avatar_{{avatar}}.png"
+                alt="avatar">
+            }
+        </div>
+        <div class="personal-avatar-container">
+            <span class="text-style">eigenes Bild verwenden</span>
+            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
+            <button (click)="onUploadButtonClick()"><span>Datei hochladen</span></button>
+        </div>
+        <button [ngClass]="isDefaultAvatar ? 'inactive-button': 'active-button'"
+            [disabled]="isDefaultAvatar" class="button">Weiter</button>
+    </div>
 </div>
