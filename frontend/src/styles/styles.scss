@@ -14,6 +14,7 @@ body {
 }
 
 a {
+    text-decoration: none;
     font-family: 'Figtree';
     font-size: 18px;
     font-weight: 400;
@@ -97,20 +98,27 @@ small {
     color: $error-color;
 }
 
-.active-button {
+.button {
     padding: 12px 25px;
     border-radius: 25px;
     border: unset;
     font-size: 18px;
     font-weight: 700;
     line-height: 24.55px;
-    background-color: $text-button-color;
     color: $primary-color;
     cursor: pointer;
+}
+
+.active-button {
+    background-color: $text-button-color;
 
     &:hover {
         background-color: $text-button-hover-color;
     }
+}
+
+.inactive-button {
+    background-color: $placeholder-color;
 }
 
 .d-none {

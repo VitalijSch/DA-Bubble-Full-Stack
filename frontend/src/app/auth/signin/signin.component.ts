@@ -1,14 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
 export class SigninComponent {
+  public isChecked: boolean = false;
   public signinForm: FormGroup;
 
   private fb: FormBuilder = inject(FormBuilder);
@@ -23,5 +26,9 @@ export class SigninComponent {
 
   public signinUser(): void {
 
+  }
+
+  public toggleIsChecked(): void {
+    this.isChecked = !this.isChecked;
   }
 }
