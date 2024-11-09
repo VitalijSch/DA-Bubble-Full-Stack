@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -14,9 +14,10 @@ export class ChooseAvatarComponent {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   public selectedFile: File | null = null;
-  public selectedAvatar: string | ArrayBuffer | null = './../../../assets/images/avatar_default.png';
+  public selectedAvatar: string | ArrayBuffer = './../../../assets/images/avatar_default.png';
 
   private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
 
   constructor() {
     console.log(this.authService.user)
@@ -36,29 +37,44 @@ export class ChooseAvatarComponent {
       this.selectedFile = fileInput.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        this.selectedAvatar = reader.result;
-        this.authService.user.profile_image = reader.result;
+        if (reader.result) {
+          this.selectedAvatar = reader.result;
+        }
       };
       reader.readAsDataURL(this.selectedFile);
     }
   }
 
-  public signinUser(): void {
-    // if (this.isDefaultAvatar) {
+  public createUser(): void {
+    if (!this.isDefaultAvatar) {
       const formData = new FormData();
       const user = this.authService.user;
-      formData.append('name', user.name);
+      console.log(user)
+      formData.append('name', user.username);
       formData.append('email', user.email);
       formData.append('password', user.password);
-      if (typeof user.profile_image === 'string') {
-        formData.append('profile_image', user.profile_image);
+      if (this.selectedFile) {
+        formData.append('profile_image', this.selectedFile);
       }
-      console.log(formData)
-      // this.addUser(formData);
-    // }
+      this.signinUser(formData);
+    }
+  }
+
+  public signinUser(formData: FormData): void {
+    this.authService.registerUser(formData).subscribe({
+      next: () => {
+        this.authService.resetUser();
+        this.selectedFile = null;
+        this.selectedAvatar = './../../../assets/images/avatar_default.png';
+        this.router.navigate(['auth/login']);
+      },
+      error: (error) => {
+        console.error('Registrierungsfehler:', error);
+      }
+    });
   }
 
   get isDefaultAvatar(): boolean {
-    return this.selectedAvatar !== null && typeof this.selectedAvatar === 'string' && this.selectedAvatar.includes('default');
+    return typeof this.selectedAvatar === 'string' && this.selectedAvatar.includes('default');
   }
 }

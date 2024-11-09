@@ -28,7 +28,7 @@
             <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
             <button (click)="onUploadButtonClick()"><span>Datei hochladen</span></button>
         </div>
-        <button [ngClass]="isDefaultAvatar ? 'inactive-button': 'active-button'"
+        <button (click)="createUser()" [ngClass]="isDefaultAvatar ? 'inactive-button': 'active-button'"
             [disabled]="isDefaultAvatar" class="button">Weiter</button>
     </div>
 </div>

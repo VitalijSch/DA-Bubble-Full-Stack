@@ -8,17 +8,24 @@ import { User } from '../../interfaces/user';
 })
 export class AuthService {
   public user: User = {
-    name: '',
+    username: '',
     email: '',
     password: '',
-    profile_image: null
   };
 
-  private apiUrl: string = 'http://127.0.0.1:8000/api';
+  private apiUrl: string = 'http://127.0.0.1:8000/auth';
 
   private http: HttpClient = inject(HttpClient);
 
+  public resetUser(): void {
+    this.user = {
+      username: '',
+      email: '',
+      password: '',
+    };
+  }
+
   public registerUser(data: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/register/`, data);
+    return this.http.post(`${this.apiUrl}/register/`, data);
   }
 }

@@ -22,7 +22,7 @@ export class SigninComponent {
 
   constructor() {
     this.signinForm = this.fb.group({
-      name: ['', Validators.required],
+      username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
@@ -36,7 +36,7 @@ export class SigninComponent {
     }
     if (this.signinForm.valid && this.isChecked) {
       let user = this.authService.user;
-      user.name = this.signinForm.get('name')?.value;
+      user.username = this.signinForm.get('username')?.value;
       user.email = this.signinForm.get('email')?.value;
       user.password = this.signinForm.get('password')?.value
       this.authService.user = user;

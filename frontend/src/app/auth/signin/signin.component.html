@@ -25,9 +25,9 @@
                         fill="#686868" />
                 </g>
             </svg>
-            <input formControlName="name" placeholder="Name und Nachname" type="name" name="name" id="name">
-            @if(signinForm.get('name')?.invalid && signinForm.get('name')?.touched) {
-            @if(signinForm.get('name')?.hasError('required')) {
+            <input formControlName="username" placeholder="Name und Nachname" type="text" name="username" id="username">
+            @if(signinForm.get('username')?.invalid && signinForm.get('username')?.touched) {
+            @if(signinForm.get('username')?.hasError('required')) {
             <small>*Bitte geben Sie einen Namen ein.</small>
             }
             }
